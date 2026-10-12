@@ -102,8 +102,74 @@
 
             <h3>Current Progress</h3>
             <p>
-                I am learning HTML and CSS to build an interactive,
-                responsive, and professional website.
+                -- Table Structures
+
+-- Master Table (Stock Master)
+CREATE TABLE master
+(
+    item_no NUMBER(6) PRIMARY KEY,
+    item_name VARCHAR2(20) NOT NULL,
+    qty NUMBER(6)
+);
+
+-- Sales Table (When items are sold, stock should reduce)
+CREATE TABLE sales
+(
+    sales_no NUMBER(6) PRIMARY KEY,
+    item_no NUMBER(6) REFERENCES master,
+    sales_qty NUMBER(6),
+    sales_date DATE DEFAULT SYSDATE
+);
+
+-- Newstock Table (When new stock arrives, is corrected, or is removed,
+-- stock should be adjusted)
+CREATE TABLE newstock
+(
+    stock_no NUMBER(6) PRIMARY KEY,
+    item_no NUMBER(6) REFERENCES master,
+    stock_qty NUMBER(6),
+    stock_date DATE DEFAULT SYSDATE
+);
+
+
+-- TRIGGER 1
+-- Update master table when a record is inserted into sales
+
+CREATE OR REPLACE TRIGGER trg_sales_update
+AFTER INSERT ON sales
+FOR EACH ROW
+BEGIN
+    UPDATE master
+    SET qty = qty - :NEW.sales_qty
+    WHERE item_no = :NEW.item_no;
+END;
+/
+
+-- TRIGGER 2
+-- Update master table when a record is inserted,
+-- updated, or deleted in newstock
+
+CREATE OR REPLACE TRIGGER trg_newstock_update
+AFTER INSERT OR UPDATE OR DELETE ON newstock
+FOR EACH ROW
+BEGIN
+    IF INSERTING THEN
+        UPDATE master
+        SET qty = qty + :NEW.stock_qty
+        WHERE item_no = :NEW.item_no;
+
+    ELSIF UPDATING THEN
+        UPDATE master
+        SET qty = qty - :OLD.stock_qty + :NEW.stock_qty
+        WHERE item_no = :NEW.item_no;
+
+    ELSIF DELETING THEN
+        UPDATE master
+        SET qty = qty - :OLD.stock_qty
+        WHERE item_no = :OLD.item_no;
+    END IF;
+END;
+/
             </p>
 
             <h3>Things to Complete</h3>
