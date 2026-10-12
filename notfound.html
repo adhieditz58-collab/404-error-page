@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MESSI | The Legacy</title>
+
+<style>
+
+/* RESET */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #080b12;
+    color: white;
+}
+
+
+/* NAVBAR */
+
+.navbar {
+    height: 80px;
+    padding: 0 8%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #080b12;
+    border-bottom: 1px solid #252a35;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 27px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.logo span {
+    color: #d8ff00;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.nav-links a,
+.drop-button {
+    font-size: 14px;
+    color: #c3c8d2;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.nav-links a:hover,
+.drop-button:hover {
+    color: #d8ff00;
+}
+
+
+/* DROPDOWN */
+
+.dropdown {
+    position: relative;
+}
+
+.drop-button {
+    padding: 15px 0;
+}
+
+.arrow {
+    display: inline-block;
+    margin-left: 5px;
+    transition: transform 0.3s;
+}
+
+.dropdown.open .arrow {
+    transform: rotate(180deg);
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: -20px;
+    min-width: 190px;
+    padding: 10px;
+    background: #151a25;
+    border: 1px solid #303746;
+    border-radius: 8px;
+    box-shadow: 0 15px 35px #0007;
+}
+
+.dropdown.open .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 13px;
+    border-radius: 5px;
+    color: #c3c8d2;
+}
+
+.dropdown-menu a:hover {
+    background: #252c39;
+    color: #d8ff00;
+}
+
+
+/* NAVBAR BUTTON */
+
+.nav-cta {
+    background: #d8ff00;
+    color: #080b12;
+    padding: 12px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+
+/* HERO SECTION */
+
+.hero {
+    min-height: 650px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 70px 8%;
+    background:
+        radial-gradient(ellipse at 80% 50%, #293122 0%, transparent 45%),
+        #080b12;
+    overflow: hidden;
+}
+
+.hero-content {
+    flex: 1;
+    max-width: 550px;
+}
+
+.tag {
+    color: #d8ff00;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 4px;
+    margin-bottom: 25px;
+}
+
+.hero h1 {
+    font-size: clamp(48px, 6vw, 85px);
+    line-height: 0.98;
+    letter-spacing: -3px;
+    margin-bottom: 25px;
+}
+
+.hero h1 span {
+    color: #d8ff00;
+}
+
+.hero-description {
+    color: #a5adba;
+    line-height: 1.9;
+    font-size: 15px;
+    max-width: 420px;
+    margin-bottom: 30px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.primary-button {
+    display: inline-block;
+    background: #d8ff00;
+    color: #080b12;
+    padding: 15px 22px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 13px;
+    transition: 0.3s;
+}
+
+.primary-button:hover {
+    background: white;
+    transform: translateY(-3px);
+}
+
+.secondary-button {
+    display: inline-block;
+    border: 1px solid #454b57;
+    color: white;
+    padding: 15px 22px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 13px;
+    transition: 0.3s;
+}
+
+.secondary-button:hover {
+    border-color: #d8ff00;
+}
+
+
+/* PLAYER IMAGE */
+
+.hero-image {
+    flex: 1;
+    max-width: 470px;
+    position: relative;
+}
+
+.hero-image img {
+    display: block;
+    width: 100%;
+    height: 490px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 12px;
+    background: #151a25;
+}
+
+.image-overlay {
+    position: absolute;
+    inset: auto 0 0;
+    padding: 30px 20px 20px;
+    border-radius: 0 0 12px 12px;
+    background: linear-gradient(transparent, #080b12);
+}
+
+.image-overlay h2 {
+    font-size: 28px;
+    letter-spacing: 2px;
+}
+
+.image-overlay p {
+    color: #d8ff00;
+    font-size: 11px;
+    letter-spacing: 3px;
+    margin-top: 8px;
+}
+
+
+/* ACHIEVEMENTS */
+
+.achievements {
+    padding: 70px 8%;
+    background: #111621;
+}
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-heading p {
+    color: #d8ff00;
+    font-size: 11px;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+}
+
+.section-heading h2 {
+    font-size: 35px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.card {
+    padding: 30px;
+    background: #191f2b;
+    border: 1px solid #2b3240;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: #d8ff00;
+}
+
+.card h3 {
+    font-size: 35px;
+    color: #d8ff00;
+    margin-bottom: 12px;
+}
+
+.card p {
+    color: #a5adba;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+
+/* ABOUT */
+
+.about {
+    padding: 90px 8%;
+    text-align: center;
+}
+
+.about h2 {
+    font-size: 38px;
+    margin-bottom: 20px;
+}
+
+.about > p:last-child {
+    max-width: 650px;
+    margin: auto;
+    color: #a5adba;
+    line-height: 1.9;
+}
+
+
+/* PROMOTIONAL BANNER */
+
+.banner {
+    margin: 20px 8% 80px;
+    padding: 60px 25px;
+    text-align: center;
+    border-radius: 12px;
+    background: #d8ff00;
+    color: #080b12;
+}
+
+.banner h2 {
+    font-size: clamp(27px, 5vw, 45px);
+    margin-bottom: 15px;
+}
+
+.banner p {
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+.banner a {
+    display: inline-block;
+    background: #080b12;
+    color: white;
+    padding: 14px 22px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+
+/* FOOTER */
+
+footer {
+    padding: 30px 8%;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    border-top: 1px solid #252a35;
+    color: #7e8796;
+    font-size: 12px;
+}
+
+footer a {
+    color: #a5adba;
+    text-decoration: none;
+}
+
+
+/* MOBILE MENU */
+
+.menu-toggle {
+    display: none;
+    color: white;
+    background: none;
+    border: none;
+    font-size: 26px;
+    cursor: pointer;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 800px) {
+
+    .navbar {
+        height: 70px;
+        padding: 0 5%;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        padding: 20px 5%;
+        background: #10151f;
+        border-bottom: 1px solid #303746;
+        align-items: stretch;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links > a,
+    .drop-button {
+        display: block;
+        width: 100%;
+        text-align: left;
+        padding: 12px 0;
+    }
+
+    .dropdown-menu {
+        position: static;
+        margin-top: 5px;
+        box-shadow: none;
+        width: 100%;
+    }
+
+    .nav-cta {
+        display: none;
+    }
+
+    .hero {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 55px 6%;
+    }
+
+    .hero-content {
+        max-width: 100%;
+    }
+
+    .hero-image {
+        max-width: 100%;
+    }
+
+    .hero-image img {
+        height: 420px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .achievements {
+        padding: 60px 6%;
+    }
+
+    .about {
+        padding: 70px 6%;
+    }
+
+    .banner {
+        margin: 20px 6% 60px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION BAR -->
+
+<nav class="navbar">
+
+    <div class="logo">M<span>10</span></div>
+
+    <button class="menu-toggle" id="menuToggle"
+        aria-label="Open navigation menu"
+        aria-expanded="false">☰</button>
+
+    <div class="nav-links" id="navLinks">
+
+        <a href="#home">Home</a>
+
+        <!-- ABOUT DROPDOWN -->
+
+        <div class="dropdown">
+
+            <button class="drop-button" aria-expanded="false">
+                About <span class="arrow">⌄</span>
+            </button>
+
+            <div class="dropdown-menu">
+                <a href="#about">Messi's Story</a>
+                <a href="#achievements">Achievements</a>
+                <a href="#career">Career</a>
+                <a href="#banner">Legacy</a>
+            </div>
+
+        </div>
+
+        <!-- CAREER DROPDOWN -->
+
+        <div class="dropdown">
+
+            <button class="drop-button" aria-expanded="false">
+                Career <span class="arrow">⌄</span>
+            </button>
+
+            <div class="dropdown-menu">
+                <a href="#career">Barcelona</a>
+                <a href="#career">PSG</a>
+                <a href="#career">Inter Miami</a>
+                <a href="#career">Argentina</a>
+            </div>
+
+        </div>
+
+        <a href="#achievements">Trophies</a>
+
+    </div>
+
+    <a href="#banner" class="nav-cta">EXPLORE LEGACY ↗</a>
+
+</nav>
+
+
+<!-- HERO ADVERTISEMENT -->
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <p class="tag">THE GAME. THE MAGIC. THE LEGEND.</p>
+
+        <h1>
+            BUILT<br>
+            DIFFERENT.<br>
+            <span>MADE LEGENDARY.</span>
+        </h1>
+
+        <p class="hero-description">
+            More than football. A story of passion, dedication
+            and unforgettable moments. Discover the journey
+            of Lionel Messi.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="#about" class="primary-button">
+                DISCOVER THE STORY ↗
+            </a>
+
+            <a href="#achievements" class="secondary-button">
+                VIEW ACHIEVEMENTS
+            </a>
+        </div>
+
+    </div>
+
+
+    <div class="hero-image">
+
+        <img
+            src="https://commons.wikimedia.org/wiki/Special:FilePath/Lionel_Messi_20180626.jpg"
+            alt="Lionel Messi on the football field"
+        >
+
+        <div class="image-overlay">
+            <h2>LIONEL MESSI</h2>
+            <p>THE NUMBER 10 • THE LEGACY</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ACHIEVEMENTS -->
+
+<section class="achievements" id="achievements">
+
+    <div class="section-heading">
+        <p>A CAREER LIKE NO OTHER</p>
+        <h2>Numbers Tell a Story.</h2>
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>8×</h3>
+            <p>
+                Ballon d'Or awards celebrating individual excellence.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>10</h3>
+            <p>
+                La Liga titles won during his legendary Barcelona career.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>2022</h3>
+            <p>
+                The year Argentina lifted the FIFA World Cup in Qatar.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ABOUT -->
+
+<section class="about" id="about">
+
+    <p class="tag">THE STORY BEHIND THE LEGEND</p>
+
+    <h2>Greatness Is Earned.</h2>
+
+    <p>
+        From Rosario, Argentina, to football's biggest stages,
+        Lionel Messi has inspired generations with his creativity,
+        determination and extraordinary ability with the ball.
+        His journey reminds us that greatness takes patience,
+        hard work and belief.
+    </p>
+
+</section>
+
+
+<!-- CAREER -->
+
+<section class="about" id="career">
+
+    <p class="tag">ONE JOURNEY. MANY CHAPTERS.</p>
+
+    <h2>A Career That Inspired Millions.</h2>
+
+    <p>
+        Barcelona. Paris Saint-Germain. Inter Miami.
+        Argentina. Each chapter has added to the story of
+        one of football's most celebrated players.
+    </p>
+
+</section>
+
+
+<!-- PROMOTIONAL BANNER -->
+
+<section class="banner" id="banner">
+
+    <h2>LEGENDS NEVER STOP INSPIRING.</h2>
+
+    <p>Celebrate the passion. Remember the moments. Share the legacy.</p>
+
+    <a href="#home">BACK TO TOP ↑</a>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <p>FAN-MADE MESSI PROMOTIONAL WEBSITE</p>
+
+    <a href="#home">Back to Home ↑</a>
+
+</footer>
+
+
+<!-- DROPDOWN AND MOBILE MENU JAVASCRIPT -->
+
+<script>
+
+const dropdowns = document.querySelectorAll(".dropdown");
+const menuToggle = document.getElementById("menuToggle");
+const navLinks = document.getElementById("navLinks");
+
+/* Open or close dropdowns */
+
+dropdowns.forEach(dropdown => {
+
+    const button = dropdown.querySelector(".drop-button");
+
+    button.addEventListener("click", function(event) {
+
+        event.stopPropagation();
+
+        dropdowns.forEach(other => {
+            if (other !== dropdown) {
+                other.classList.remove("open");
+                other.querySelector(".drop-button")
+                    .setAttribute("aria-expanded", "false");
+            }
+        });
+
+        const isOpen = dropdown.classList.toggle("open");
+
+        button.setAttribute("aria-expanded", isOpen);
+
+    });
+
+});
+
+
+/* Close dropdown when clicking outside */
+
+document.addEventListener("click", function(event) {
+
+    dropdowns.forEach(dropdown => {
+
+        if (!dropdown.contains(event.target)) {
+
+            dropdown.classList.remove("open");
+
+            dropdown.querySelector(".drop-button")
+                .setAttribute("aria-expanded", "false");
+
+        }
+
+    });
+
+});
+
+
+/* Mobile navigation menu */
+
+menuToggle.addEventListener("click", function() {
+
+    const isOpen = navLinks.classList.toggle("active");
+
+    menuToggle.setAttribute("aria-expanded", isOpen);
+
+    menuToggle.textContent = isOpen ? "✕" : "☰";
+
+});
+
+
+/* Close mobile menu after clicking a link */
+
+navLinks.querySelectorAll("a").forEach(link => {
+
+    link.addEventListener("click", function() {
+
+        navLinks.classList.remove("active");
+
+        menuToggle.setAttribute("aria-expanded", "false");
+
+        menuToggle.textContent = "☰";
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>
